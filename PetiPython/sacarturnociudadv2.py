@@ -14,6 +14,7 @@ from random import randint
 
 #INICIALIZO PARAMETROS - INICIO
 texto = ""
+urldir = r"C:\Users\JoacoLacal\Desktop\Python\GitHub\PruebaHTML.html"
 #RECUPERO ARCHIVO CONFIGURACION - INICIO
 number = randint(0,9999)
 urlguardarconfig = r"C:\Users\JoacoLacal\Desktop\Python\GitHub\config" + str(datetime.now().year).strip() + str(datetime.now().month).strip() + str(datetime.now().day).strip()  + "-" + str(number).strip() + ".txt"
@@ -22,7 +23,6 @@ wget.download(urlconfig,urlguardarconfig)
 #RECUPERO ARCHIVO CONFIGURACION - FIN
 parametros = open(urlguardarconfig)
 link = parametros.readline().strip()
-urldir = parametros.readline().strip()
 diasreserva = int(parametros.readline().strip())
 btnreserva = "Reservá tu turno"
 btngoogle = parametros.readline().strip()
@@ -80,9 +80,7 @@ def iterohasta(hasta):
         pass
     #ITERO HASTA QUE SEAN LAS 00 - FIN      
 
-def guardararchivohtml():
-    number = randint(0,9999)
-    urlarchivo = urldir + str(datetime.now().year).strip() + str(datetime.now().month).strip() + str(datetime.now().day).strip()  + "-" + str(number).strip() + ".html"
+def guardararchivohtml(urlarchivo):
     #ELIMINAR HTML LOCAL - INICIO
     if os.path.isfile(urlarchivo):
         remove(urlarchivo)
@@ -188,7 +186,7 @@ for reservarhora in listahorarios:
 
                 #PARA PODER REVISAR EL HTML - INICIO
                 if guardarhtml==True:
-                    guardararchivohtml()
+                    guardararchivohtml(urldir)
                 #PARA PODER REVISAR EL HTML - FIN
             else:
                 continuar = False
@@ -242,7 +240,7 @@ for reservarhora in listahorarios:
 
         #PARA PODER REVISAR EL HTML - INICIO
         if guardarhtml==True:
-            guardararchivohtml()
+            guardararchivohtml(urldir)
         #PARA PODER REVISAR EL HTML - FIN
 
         time.sleep(10)

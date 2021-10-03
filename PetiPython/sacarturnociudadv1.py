@@ -9,19 +9,11 @@ from datetime import timedelta
 from os import remove
 import os
 import ast
-import wget
-from random import randint
 
 #INICIALIZO PARAMETROS - INICIO
 texto = ""
 urldir = r"C:\Users\JoacoLacal\Desktop\Python\GitHub\PruebaHTML.html"
-#RECUPERO ARCHIVO CONFIGURACION - INICIO
-number = randint(0,9999)
-urlguardarconfig = r"C:\Users\JoacoLacal\Desktop\Python\GitHub\config" + str(datetime.now().year).strip() + str(datetime.now().month).strip() + str(datetime.now().day).strip()  + "-" + str(number).strip() + ".txt"
-urlconfig = "https://drive.google.com/u/0/uc?id=1zBppgcpoBDz5OQfJTO9QGJrBQlNhgzgQ&export=download"
-wget.download(urlconfig,urlguardarconfig)
-#RECUPERO ARCHIVO CONFIGURACION - FIN
-parametros = open(urlguardarconfig)
+parametros = open(r"C:\Users\JoacoLacal\Desktop\Python\GitHub\config.txt")
 link = parametros.readline().strip()
 diasreserva = int(parametros.readline().strip())
 btnreserva = "Reservá tu turno"

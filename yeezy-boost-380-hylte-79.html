@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-172758260-1">
+  </script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-172758260-1');
+  </script>
+  <meta charset="utf-8"/>
+  <title>
+   DIONYSOS - YEEZY BOOST 380 HYLTE
+  </title>
+  <meta content="FLUID - YEEZY BOOST 380 HYLTE" name="description"/>
+  <meta charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0" name="viewport"/>
+  <base href="/"/>
+  <link href="/img/favicon.png" rel="shortcut icon" type="image/ico"/>
+  <style>
+   :root {
+  --color1: #ffffff;
+  --color2: #000000;
+  --color3: #000000;
+}
+  </style>
+  <link href="css/styles.css?v=2" rel="stylesheet" type="text/css"/>
+  <script charset="utf-8" src="mootools/MooTools-More-1.6.0-compressed.js">
+  </script>
+  <script charset="utf-8" src="config.js">
+  </script>
+  <script charset="utf-8" src="common.js">
+  </script>
+  <link href="components/ajaxloader/css/ajaxloader.css" rel="stylesheet" type="text/css">
+   <link href="components/modalBox/css/modalBox.css" rel="stylesheet" type="text/css"/>
+   <script language="javascript" src="components/ajaxloader/js/ajaxloader.js" type="text/javascript">
+   </script>
+   <script language="javascript" src="components/modalBox/js/modalBox.js" type="text/javascript">
+   </script>
+   <script src="https://www.google.com/recaptcha/api.js?render=6Ld9qR4bAAAAAH2KH78o5su7TCHPutcP9toYFGqf">
+   </script>
+   <script>
+    window.addEvent('load', function(){
+	
+	$$('.grecaptcha-badge').setStyle('visibility','hidden');
+	
+	productsArr = [{"id":"526157","brand":"AD","sku":"FZ4990","title_kalas":"YEEZY BOOST 380 HYLTE\/HYLT H21","title":"ZAPATILLAS YEEZY BOOST 380 HYLTE","img_80x80":"6130e96895d41-526157-80x80.jpg","variants":[{"id":"526157_4M","size":"4M","size_arg":"36","available":"3","barcode":"[\"4064043578694\"]"},{"id":"526157_5","size":"5","size_arg":"36.5","available":"5","barcode":"[\"4064043582448\"]"},{"id":"526157_5M","size":"5M","size_arg":"37","available":"3","barcode":"[\"4064043578700\"]"},{"id":"526157_6","size":"6","size_arg":"37.5","available":"2","barcode":"[\"4064043578755\"]"},{"id":"526157_6M","size":"6M","size_arg":"38","available":"2","barcode":"[\"4064043578670\"]"},{"id":"526157_7","size":"7","size_arg":"39","available":"2","barcode":"[\"4064043578656\"]"},{"id":"526157_7M","size":"7M","size_arg":"39.5","available":"2","barcode":"[\"4064043578649\"]"},{"id":"526157_8","size":"8","size_arg":"40","available":"3","barcode":"[\"4064043578779\"]"},{"id":"526157_8M","size":"8M","size_arg":"41","available":"8","barcode":"[\"4064043582394\"]"},{"id":"526157_9","size":"9","size_arg":"41.5","available":"2","barcode":"[\"4064043578762\"]"},{"id":"526157_9M","size":"9M","size_arg":"42","available":"3","barcode":"[\"4064043582417\"]"},{"id":"526157_10","size":"10","size_arg":"43","available":"6","barcode":"[\"4064043578618\"]"},{"id":"526157_10M","size":"10M","size_arg":"43.5","available":"3","barcode":"[\"4064043578601\"]"},{"id":"526157_11","size":"11","size_arg":"44","available":"1","barcode":"[\"4064043578663\"]"},{"id":"526157_11M","size":"11M","size_arg":"45","available":"1","barcode":"[\"4064043582431\"]"}]}];
+	activQty = 0;
+
+	UI.Apps.scroll = new Fx.Scroll(document.body,{
+	    offset: {
+	        x: 0,
+	        y: 0
+	    }
+	})
+
+	$$('#step_1 .next')[0].addEvent('click:throttle(5000)',function(event){
+		console.log("1");
+		$$('#step_1')[0].getElements('.required').removeClass('required');
+		if(!$$('#step_1')[0].getElement('input[name=postal_code]').get('value') || isNaN($$('#step_1')[0].getElement('input[name=postal_code]').get('value'))){
+			new UI.Comp.modalBox({text:"El código postal debe debe ser un número de hasta 4 dígitos. Ej: 2000"});
+		}else{
+
+			//grecaptcha.ready(function() {
+				//grecaptcha.execute('6Ld9qR4bAAAAAH2KH78o5su7TCHPutcP9toYFGqf', {action: 'checkUser'}).then(function(token) {
+				
+					if($$('form #step_1 #personal_data input[name=action]')[0])$$('form #step_1 #personal_data input[name=action]')[0].destroy();
+					if($$('form #step_1 #personal_data input[name=token]')[0])$$('form #step_1 #personal_data input[name=token]')[0].destroy();
+				
+					// new Element('input',{
+					//  	'type':"hidden",
+					//  	'name':"token",
+					//  	'value':token,
+					// }).inject($$('form #step_1 #personal_data')[0], 'top');
+	
+					// new Element('input',{
+					//  	'type':"hidden",
+					//  	'name':"action",
+					//  	'value':"checkUser",
+					// }).inject($$('form #step_1 #personal_data')[0], 'top');
+	
+					new Request.JSON({
+						url: 'raffle_post.php?raffleid=79',
+						data: $$('#step_1')[0],
+						onRequest: function(){
+							UI.Apps.ajaxLoader.show();
+							$$('.required').removeClass('required');
+						},
+						onSuccess: function(response){
+							UI.Apps.ajaxLoader.hide();
+							
+							location.href = '/raffle/yeezy-boost-380-hylte-79/done/';
+							
+							// if(activQty < 1){
+							// 	location.href = '/raffle/yeezy-boost-380-hylte-79/done/';
+							// }else{
+							// 	$$('#step_2')[0].addClass('active');
+							// 	UI.Apps.scroll.toElement($$('#step_2')[0]);
+							// 	UI.Apps.hash = response.hash;
+							// }
+						},
+						onFailure: function(response){
+							UI.Apps.ajaxLoader.hide();
+							response = JSON.decode(response.response);
+							
+							switch(response.code){
+								case 409:
+									new UI.Comp.modalBox({
+										title: 'ATENCIÓN',
+										text: 'EL RAFFLE AUN NO ESTA ACTIVO',
+										icon: 'alert'
+									})
+									break;
+								case 451:
+									new UI.Comp.modalBox({
+										title: 'ATENCIÓN',
+										text: 'DEBE ACEPTAR TERMINOS Y CONDICIONES PARA CONTINUAR',
+										icon: 'alert'
+									})
+									break;
+								case 452:
+									new UI.Comp.modalBox({
+										title: 'TIEMPO AGOTADO',
+										text: 'LO SENTIMOS EL RAFFLE A TERMINADO.',
+										icon: 'alert'
+									})
+									break;
+								default:
+									Object.each(response.fields, function(value, key){
+										console.log(key);
+										$$('div[name='+key+'],input[name='+key+'], select[name='+key+']').addClass('required');
+									});
+									new UI.Comp.modalBox({
+										title: 'ATENCIÓN',
+										text: 'Faltan completar campos requeridos',
+										icon: 'alert'
+									});
+									break;
+							}
+						
+						}
+					
+					}).post();					
+				//});
+	       //}.bind(this));		
+
+		}
+	}.bind(this));	
+
+	$$('#product').addEvent('change',function(event){
+		
+		key = $$('#product')[0].getElement('option:selected').get('productkey');	
+		$$('#variant')[0].empty();
+
+		new Element('option',{
+						'value':"",
+						'selected':true,
+						'disabled':true,
+						'html':"Seleccioná un talle",
+					}).inject($$('#variant')[0]);
+
+		Array.each(productsArr[key].variants,function(variant){
+			if(JSON.decode(variant.barcode) && JSON.decode(variant.barcode).length > 0){
+				new Element('option',{
+								'value':variant.id,
+								'html':variant.size+' - (ARG '+variant.size_arg+')',
+							}).inject($$('#variant')[0]);
+			}
+		}.bind(this))
+		
+	}.bind(this));	
+
+	if(productsArr.length == 1){
+		$$('#product')[0].getParent('label').setStyle('display','none');
+		$$('#product')[0].set('value',productsArr[0].id);
+		$$('#product')[0].fireEvent('change');
+	}else{
+		$$('#product')[0].getParent('label').setStyle('display','block');
+	}
+	
+	$$('.step .next').addEvent('click',function(event){
+				
+		step = event.target.getParent('.step').get('id').split('_');
+		if(parseInt(step[1]) != 1){
+			step = 'step_'+(parseInt(step[1])+1);
+			
+			if($$('#'+step)[0]){
+				$$('#'+step)[0].addClass('active');
+				UI.Apps.scroll.toElement($$('#'+step)[0]);
+			}
+		}
+	});	
+
+	$$(".activity.multiplechoice input[type=radio].quiz_option").addEvent('click',function(event){
+		
+		radio_length = event.target.getParent('.step').getElements('.quiz').length;
+		checked_length = event.target.getParent('.step').getElements('input[type=radio].quiz_option:checked').length;
+		
+		if(checked_length >= radio_length){
+			event.target.getParent('.step').getElement('.next').set('disabled','');
+		}
+	});	
+
+	$$(".activity.differences .image_wrapper .check_wrapper").addEvent('click',function(event){
+		this.addClass('active');
+
+		points = event.target.getParent('.image_wrapper').getElements('.check_wrapper').length;
+		active_points = event.target.getParent('.image_wrapper').getElements('.check_wrapper.active').length;
+
+		if(active_points==points){
+			event.target.getParent('.image_wrapper').getElement('input[type=hidden]').set('value',1);
+			event.target.getParent('.step').getElement('.next').set('disabled','');
+		}
+	});
+
+	$$(".activity.lookingfor .image_wrapper .check_wrapper").addEvent('click',function(event){
+		this.addClass('active');
+		
+		points = event.target.getParent('.image_wrapper').getElements('.check_wrapper').length;
+		active_points = event.target.getParent('.image_wrapper').getElements('.check_wrapper.active').length;
+		
+		if(active_points==points){
+			event.target.getParent('.image_wrapper').getElement('input[type=hidden]').set('value',1);
+			event.target.getParent('.step').getElement('.next').set('disabled','');
+		}
+	});
+
+	if(activQty >= 1){
+		$$('.activity_step .next')[$$('.activity_step .next').length-1].removeEvents();
+		$$('.activity_step .next')[$$('.activity_step .next').length-1].addEvent('click:throttle(5000)',function(event){
+			console.log("2");
+
+			var data=$$('form')[0].toQueryString().parseQueryString();
+			data.hash = UI.Apps.hash;
+			
+			new Request.JSON({
+				url: 'raffle_score_post.php?raffleid=79',
+				data: data,
+				onRequest: function(){
+					UI.Apps.ajaxLoader.show();
+				},
+				onSuccess: function(response){
+					UI.Apps.ajaxLoader.hide();
+	
+					location.href = '/raffle/yeezy-boost-380-hylte-79/done/';
+				},
+				onFailure: function(response){
+					UI.Apps.ajaxLoader.hide();
+					response = JSON.decode(response.response);
+					
+					switch(response.code){
+						case 409:
+							new UI.Comp.modalBox({
+								title: 'ATENCIÓN',
+								text: 'EL RAFFLE AUN NO ESTA ACTIVO',
+								icon: 'alert'
+							})
+							break;
+						case 451:
+							new UI.Comp.modalBox({
+								title: 'ATENCIÓN',
+								text: 'DEBE ACEPTAR TERMINOS Y CONDICIONES PARA CONTINUAR',
+								icon: 'alert'
+							})
+							break;
+						case 452:
+							new UI.Comp.modalBox({
+								title: 'TIEMPO AGOTADO',
+								text: 'LO SENTIMOS EL RAFFLE A TERMINADO.',
+								icon: 'alert'
+							})
+							break;
+						case 429:
+							location.href = '/raffle/yeezy-boost-380-hylte-79/done/';
+							break;
+						default:
+							Object.each(response.fields, function(value, key){
+								console.log(key);
+								$$('input[name='+key+'], select[name='+key+']').addClass('required');
+							});
+							
+							new UI.Comp.modalBox({
+								title: 'ATENCIÓN',
+								text: 'Faltan completar campos requeridos',
+								icon: 'alert'
+							});
+							break;
+					}
+				
+				}
+			}).post(data);
+	
+		});	
+	}
+	
+});
+   </script>
+  </link>
+ </head>
+ <body>
+  <div id="container">
+   <img src="files/raffles/9e760154964ab6480b02d27f320db6de.jpg" style="width: 100%;"/>
+   <form>
+    <input name="activity_set" type="hidden" value="0"/>
+    <div class="step" id="step_1" style="opacity: 1;background-image:url(files/raffles/c73510adc378b1846673bb4818024cda.jpg);">
+     <h1>
+      COMPLETÁ CON TUS DATOS
+     </h1>
+     <div id="personal_data">
+      <label>
+       <span id="data">
+        NOMBRE
+       </span>
+       <input name="firstname" size="32" type="text" value=""/>
+      </label>
+      <label>
+       <span id="data">
+        APELLIDO
+       </span>
+       <input name="lastname" size="32" type="text" value=""/>
+      </label>
+      <label>
+       <span id="data">
+        DNI
+       </span>
+       <input name="dni" onkeydown="if(this.value.length==9 &amp;&amp; event.keyCode&gt;47 &amp;&amp; event.keyCode &lt; 58)return false;" size="32" type="number" value=""/>
+      </label>
+      <label>
+       <span id="data">
+        GÉNERO
+       </span>
+       <select name="gender">
+        <option disabled="true" selected="true" value="">
+        </option>
+        <option value="2">
+         MUJER
+        </option>
+        <option value="1">
+         HOMBRE
+        </option>
+        <option value="0">
+         OTRO
+        </option>
+        <option value="-1">
+         PREFIERO NO DECIRLO
+        </option>
+       </select>
+      </label>
+      <label>
+       <span id="data">
+        FECHA DE NACIMIENTO
+       </span>
+       <input name="birthdate" type="date"/>
+      </label>
+      <div class="label">
+       <span id="data">
+        NÚMERO DE CELULAR
+       </span>
+       <div class="fake_input" name="mobile">
+        0
+        <input maxlength="4" name="mobilearea" placeholder="COD" style="width: 40px;top: -2px;display: inline-block;border: none;background: none;" type="number"/>
+        -15
+        <input maxlength="8" name="mobilenumber" placeholder="CELULAR" style="width: 170px;top: -2px;    display: inline-block;border: none;background: none;" type="number"/>
+       </div>
+      </div>
+      <label>
+       <span id="data">
+        LOCALIDAD
+       </span>
+       <input autocomplete="off" name="city" type="text"/>
+      </label>
+      <label>
+       <span id="data">
+        CÓDIGO POSTAL
+       </span>
+       <input maxlength="4" name="postal_code" type="text"/>
+      </label>
+      <label>
+       <span id="data">
+        PROVINCIA
+       </span>
+       <select name="province">
+       </select>
+       <option disabled="true" selected="true" value="">
+        PROVINCIA
+       </option>
+       <option value="BUENOS AIRES">
+        BUENOS AIRES
+       </option>
+       <option value="CIUDAD AUTONOMA B.A">
+        CIUDAD AUTONOMA B.A
+       </option>
+       <option value="CATAMARCA">
+        CATAMARCA
+       </option>
+       <option value="CHACO">
+        CHACO
+       </option>
+       <option value="CHUBUT">
+        CHUBUT
+       </option>
+       <option value="CORDOBA">
+        CORDOBA
+       </option>
+       <option value="CORRIENTES">
+        CORRIENTES
+       </option>
+       <option value="ENTRE RIOS">
+        ENTRE RIOS
+       </option>
+       <option value="FORMOSA">
+        FORMOSA
+       </option>
+       <option value="JUJUY">
+        JUJUY
+       </option>
+       <option value="LA PAMPA">
+        LA PAMPA
+       </option>
+       <option value="LA RIOJA">
+        LA RIOJA
+       </option>
+       <option value="MENDOZA">
+        MENDOZA
+       </option>
+       <option value="MISIONES">
+        MISIONES
+       </option>
+       <option value="NEUQUEN">
+        NEUQUEN
+       </option>
+       <option value="RIO NEGRO">
+        RIO NEGRO
+       </option>
+       <option value="SALTA">
+        SALTA
+       </option>
+       <option value="SAN JUAN">
+        SAN JUAN
+       </option>
+       <option value="SAN LUIS">
+        SAN LUIS
+       </option>
+       <option value="SANTA CRUZ">
+        SANTA CRUZ
+       </option>
+       <option value="SANTA FE">
+        SANTA FE
+       </option>
+       <option value="SANTIAGO DEL ESTERO">
+        SANTIAGO DEL ESTERO
+       </option>
+       <option value="TIERRA DEL FUEGO">
+        TIERRA DEL FUEGO
+       </option>
+       <option value="TUCUMAN">
+        TUCUMAN
+       </option>
+      </label>
+      <label>
+       <span id="data">
+        EMAIL
+       </span>
+       <input name="email" size="32" type="email" value=""/>
+      </label>
+      <label>
+       <span id="data">
+        CUENTA DE INSTAGRAM
+       </span>
+       <input name="instagram" size="32" type="text" value=""/>
+      </label>
+      <label style="display: none">
+       <span id="data">
+        PRODUCTO
+       </span>
+       <select id="product" name="product">
+        <option disabled="disabled" selected="true" value="">
+         Seleccioná un producto
+        </option>
+        <option productkey="0" value="526157">
+         ZAPATILLAS YEEZY BOOST 380 HYLTE
+        </option>
+       </select>
+      </label>
+      <label>
+       <span id="data">
+        TALLE EN UK
+       </span>
+       <select id="variant" name="variant">
+        <option disabled="disabled" selected="true" value="">
+         Seleccioná un talle
+        </option>
+       </select>
+      </label>
+      <label style="margin: 20px 0px; text-align: left;">
+       <input name="terms" type="checkbox" value="1"/>
+       HE LEIDO Y ACEPTO LAS BASES Y CONDICIONES
+      </label>
+      <label style=" text-align: left;">
+       <a href="/raffle/yeezy-boost-380-hylte-79/terms/" style="text-decoration: underline; text-align: left; font-size: 12px;" target="_blank">
+        VER BASES Y CONDICIONES
+       </a>
+      </label>
+      <label>
+       <input class="next bg2" id="sendFrm" style="position: relative; background-color: #ffffff;color: #000000;" type="button" value="FINALIZAR"/>
+      </label>
+     </div>
+    </div>
+    <div class="sep_gral">
+    </div>
+   </form>
+  </div>
+ </body>
+</html>

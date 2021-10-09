@@ -18,6 +18,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
+from funcionesgenerales import WebScrapping
 
 #INICIALIZO PARAMETROS - INICIO
 texto = ""
@@ -243,7 +244,8 @@ browser.get(link)
 #ABRO CHROME - FIN
 
 contcapturas = capturarpantalla(contcapturas)
-isok = clickearboton(By.LINK_TEXT,btnreserva,1)
+isok = WebScrapping.clickearboton(browser,By.LINK_TEXT,btnreserva,1)
+#isok = clickearboton(By.LINK_TEXT,btnreserva,1)
 if isok == True:
     contcapturas = capturarpantalla(contcapturas)
     isok = clickearboton(By.LINK_TEXT,btngoogle,1)
@@ -254,8 +256,10 @@ if isok == True:
             isok = llenarcampoform(formidusr,usrmail,1,By.ID)
             isok = clickearboton(By.ID,btnsiggoogleusr,3)
         else:
-            isok = llenarcampoform(formidusrfb,usrmail,1,By.ID)
-            isok = llenarcampoform(formidpassfb,usrpass,1,By.ID)
+            isok = WebScrapping.llenarcampoform(browser,formidusrfb,usrmail,1,By.ID)
+            isok = WebScrapping.llenarcampoform(browser,formidpassfb,usrmail,1,By.ID)
+            #isok = llenarcampoform(formidusrfb,usrmail,1,By.ID)
+            #isok = llenarcampoform(formidpassfb,usrpass,1,By.ID)
             isok = clickearboton(By.ID,btnloginfb,3)
 
         if isok == True:

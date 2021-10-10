@@ -5,12 +5,6 @@ from random import randint
 from os import remove
 import os
 import pyautogui
-import smtplib
-from email.message import EmailMessage
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
-from email import encoders
 
 #CREO FUNCIONES - INICIO
 def ingresartextoteclado(texto):
@@ -52,41 +46,4 @@ def capturarpantalla(capturas,directorio):
     screenshot = pyautogui.screenshot()
     screenshot.save(urlimagen)
     return cantcapturas
-
-def enviarmail(asuntomail,botmail,destinomail,smtpmail,portmail,passmail,mensaje):
-    msg = EmailMessage()
-    msg.set_content(mensaje)
-
-    msg['Subject'] = asuntomail
-    msg['From'] = botmail
-    msg['To'] = destinomail
-
-    # Send the message via our own SMTP server.
-    server = smtplib.SMTP(smtpmail, portmail)
-    server.starttls()
-    server.login(botmail, passmail)
-    server.send_message(msg)
-    server.quit()
-
-def enviarmailadjunto(asuntomail,botmail,destinomail,smtpmail,portmail,passmail,directorio,carpetaimagenes,mensaje):
-    msg = MIMEMultipart("plain")
-    msg['From'] = botmail
-    msg['To'] = destinomail
-    msg['Subject'] = asuntomail
-    msg.attach(MIMEText(mensaje,"plain"))
-    for archivo in os.listdir(directorio):
-        adjunto = MIMEBase("application","octect-stream")
-        ruta = carpetaimagenes + archivo
-        print(ruta)
-        adjunto.set_payload(open(ruta,"rb").read())
-        encoders.encode_base64(adjunto)
-        adjunto.add_header("content-Disposition","attachmet; filename= {0}".format(os.path.basename(archivo)))
-        msg.attach(adjunto)    
-
-    # Send the message via our own SMTP server.
-    server = smtplib.SMTP(smtpmail, portmail)
-    server.starttls()
-    server.login(botmail, passmail)
-    server.sendmail(botmail,destinomail, msg.as_string())    
-    server.quit()
 #CREO FUNCIONES - FIN 

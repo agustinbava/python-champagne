@@ -10,6 +10,7 @@ import functionsBotiturnos as fBotiturnos
 import sys
 sys.path.insert(1, r'C:\Users\JoacoLacal\Desktop\Python\MiCodigo')
 from functions import Scrapper
+from functions import General
 
 #RECUPERO ARCHIVO CONFIGURACION - INICIO
 if True:
@@ -349,4 +350,4 @@ if continuar == True:
     #FOR HORARIOS - FIN    
 #RESERVO - ELIJO DIA, HORA Y CANCHA - INICIO
 
-fBotiturnos.enviarmailadjunto(asuntomail,botmail,destinomail,smtpmail,portmail,passmail,directorio,carpetaimagenes,mensajemail) 
+General.sendmail(asuntomail,botmail,passmail,destinomail,smtpmail,portmail,mensajemail,directorio) 

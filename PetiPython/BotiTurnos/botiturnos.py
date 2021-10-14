@@ -5,7 +5,7 @@ import os
 import ast
 import wget
 from random import randint
-from selenium.webdriver.common.by import By 
+from selenium.webdriver.common.by import By
 import functionsBotiturnos as fBotiturnos
 import sys
 sys.path.insert(1, r'C:\Users\JoacoLacal\Desktop\Python\MiCodigo')
@@ -40,15 +40,6 @@ if True:
     onegalink = parametros.readline().strip()
     onegalinkreserva = parametros.readline().strip()
     polideportivo = parametros.readline().strip()
-    if polideportivo.upper().strip() == "COSTA RICA":
-        link = costaricalink
-        linkreserva = costaricalinkreserva
-    elif polideportivo.upper().strip() == "ONEGA":
-        link = onegalink
-        linkreserva = onegalinkreserva
-    else:
-        link = colegialeslink
-        linkreserva = colegialeslinkreserva
     urldir = parametros.readline().strip()
     diasreserva = int(parametros.readline().strip())
     btnreserva = "Reservá tu turno"
@@ -67,7 +58,8 @@ if True:
     classdia = parametros.readline().strip()
     classcancha = parametros.readline().strip()
     classhora = parametros.readline().strip()
-    buscarcancha = parametros.readline().strip()
+    buscarcanchacolegiales = parametros.readline().strip()
+    buscarcanchacostarica = parametros.readline().strip()
     usrmail = parametros.readline().strip()
     usrpass = parametros.readline().strip()
     horareserva = parametros.readline().strip()
@@ -97,8 +89,21 @@ if True:
         diasreserva -= 1
     if btngoogle.upper().find("GOOGLE") > -1:
         loggoogle = True
+        logueo = "GOOGLE"
     else:
         loggoogle = False
+        logueo = "FACEBOOK"
+    if polideportivo.upper().strip() == "COSTA RICA":
+        link = costaricalink
+        linkreserva = costaricalinkreserva
+        buscarcancha = buscarcanchacostarica
+    elif polideportivo.upper().strip() == "ONEGA":
+        link = onegalink
+        linkreserva = onegalinkreserva
+    else:
+        link = colegialeslink
+        linkreserva = colegialeslinkreserva
+        buscarcancha = buscarcanchacolegiales
 #INICIALIZO PARAMETROS - FIN
 
 #BUSCO FECHA DE RESERVA - INICIO
@@ -224,18 +229,20 @@ if continuar == True:
                         canchasdisponibles = len(canchas)
                         if len(canchasclickeadas) == 0:
                             for cancha in canchas:
-                                texto = cancha.get_attribute('innerHTML')
-                                if texto.find(buscarcancha)>-1: 
+                                # texto = cancha.get_attribute('innerHTML')
+                                canchaclickeada = cancha.get_attribute('innerHTML').upper().strip()
+                                if canchaclickeada.find(buscarcancha.upper().strip())>-1: 
                                     encontrocancha = True
-                                    canchasclickeadas.append(cancha)
+                                    canchasclickeadas.append(canchaclickeada)
                                     cancha.click()
                                     time.sleep(3)
                                     break
                         if encontrocancha == False:   
                             for cancha in canchas:
-                                if not cancha in canchasclickeadas:
+                                canchaclickeada = cancha.get_attribute('innerHTML').upper().strip()
+                                if not canchaclickeada in canchasclickeadas:
                                     encontrocancha = True
-                                    canchasclickeadas.append(cancha)
+                                    canchasclickeadas.append(canchaclickeada)
                                     cancha.click()
                                     time.sleep(3)
                                     break
@@ -289,65 +296,70 @@ if continuar == True:
                     continuar = False
                     print("NO ENCONTRO EL COMENZAR - FECHA")  
                     mensajemail +=  f"\r\r\n NO ENCONTRO EL COMENZAR - FECHA"   
-            #PASO FINAL - LLENO FORMULARIO Y FINALIZO - INICIO
-            if continuar == True:
-                #LLENO FORMULARIO - INICIO
-                contcapturas = fBotiturnos.capturarpantalla(contcapturas,directorio)
-                datosform = open(urlguardardatosform)
-                for j in range(1,formcantidad+1):
-                    lst = list(datosform.readline().strip().split(","))
-                    isok = Scrapper.fillForm(browser,By.ID,lst[0],lst[1],1.5)
-                #LLENO FORMULARIO -FIN
+                #PASO FINAL - LLENO FORMULARIO Y FINALIZO - INICIO
+                if continuar == True:
+                    #LLENO FORMULARIO - INICIO
+                    contcapturas = fBotiturnos.capturarpantalla(contcapturas,directorio)
+                    datosform = open(urlguardardatosform)
+                    for j in range(1,formcantidad+1):
+                        lst = list(datosform.readline().strip().split(","))
+                        isok = Scrapper.fillForm(browser,By.ID,lst[0],lst[1],1.5)
+                    #LLENO FORMULARIO -FIN
 
-                #CLICK EN SIGUIENTE
-                contcapturas = fBotiturnos.capturarpantalla(contcapturas,directorio)
-                encontro = False
-                buttons = browser.find_elements(By.CLASS_NAME,btnsiguiente)
-                for button in buttons:
-                    btnsig1 = button
-                    btnsig1.click()
-                    time.sleep(3)
-                    encontro = True
-                    break 
-                #CLICK EN SIGUIENTE - FIN
-
-                if encontro == True:
-                    #CLICK EN SIGUIENTE - INICIO
+                    #CLICK EN SIGUIENTE
                     contcapturas = fBotiturnos.capturarpantalla(contcapturas,directorio)
                     encontro = False
                     buttons = browser.find_elements(By.CLASS_NAME,btnsiguiente)
                     for button in buttons:
-                        if btnsig1 != button:
-                            encontro = True
-                            button.click()
-                            time.sleep(3)
-                            break  
+                        btnsig1 = button
+                        btnsig1.click()
+                        time.sleep(3)
+                        encontro = True
+                        break 
                     #CLICK EN SIGUIENTE - FIN
 
                     if encontro == True:
-                        #PARA PODER REVISAR EL HTML - INICIO
-                        if guardarhtml==True:
-                            fBotiturnos.guardararchivohtml(urldir)
-                        #PARA PODER REVISAR EL HTML - FIN
-
+                        #CLICK EN SIGUIENTE - INICIO
                         contcapturas = fBotiturnos.capturarpantalla(contcapturas,directorio)
-                        if Scrapper.clickButton(browser,By.CLASS_NAME,btnfinalizar,3):
-                            print("FINALIZO LA RESERVA CORRECTAMENTE")
-                            mensajemail +=  f"\r\r\n FINALIZO LA RESERVA CORRECTAMENTE"
-                            reservado = True
-                        else:
-                            mensajemail +=  f"\r\r\n FALLO LA RESERVA"    
+                        encontro = False
+                        buttons = browser.find_elements(By.CLASS_NAME,btnsiguiente)
+                        for button in buttons:
+                            if btnsig1 != button:
+                                encontro = True
+                                button.click()
+                                time.sleep(3)
+                                break  
+                        #CLICK EN SIGUIENTE - FIN
 
-                        time.sleep(10)
+                        if encontro == True:
+                            #PARA PODER REVISAR EL HTML - INICIO
+                            if guardarhtml==True:
+                                fBotiturnos.guardararchivohtml(urldir)
+                            #PARA PODER REVISAR EL HTML - FIN
+
+                            contcapturas = fBotiturnos.capturarpantalla(contcapturas,directorio)
+                            if Scrapper.clickButton(browser,By.CLASS_NAME,btnfinalizar,3):
+                                print("FINALIZO LA RESERVA CORRECTAMENTE")
+                                mensajemail +=  f"\r\r\n FINALIZO LA RESERVA CORRECTAMENTE"
+                                nroturno = Scrapper.findText(browser,By.TAG_NAME,"strong")
+                                fBotiturnos.insertarReservaDB(polideportivo.upper().strip(),fechareserva,reservarhora.strip(),canchaclickeada.upper().strip(),usrmail.upper().strip(),logueo,"RESERVADA",nroturno.strip())
+                                reservado = True
+                            else:
+                                mensajemail +=  f"\r\r\n FALLO LA RESERVA"    
+
+                            time.sleep(10)
+                        else:
+                            print("NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO CONFIRMACION")    
+                            mensajemail +=  f"\r\r\n NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO CONFIRMACION"
                     else:
-                        print("NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO CONFIRMACION")    
-                        mensajemail +=  f"\r\r\n NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO CONFIRMACION"
-                else:
-                    print("NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO")    
-                    mensajemail +=  f"\r\r\n NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO"
-            #PASO FINAL - LLENO FORMULARIO Y FINALIZO - FIN        
-        #FOR HORARIOS - SUBLISTA - FIN
+                        print("NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO")    
+                        mensajemail +=  f"\r\r\n NO ENCONTRO EL BOTON DE SIGUIENTE - FORMULARIO"
+                #PASO FINAL - LLENO FORMULARIO Y FINALIZO - FIN        
+                if reservado == False:
+                    fBotiturnos.insertarReservaDB(polideportivo.upper().strip(),fechareserva,reservarhora.strip(),canchaclickeada.upper().strip(),usrmail.upper().strip(),logueo,"FALLO RESERVA","")            
+            #FOR HORARIOS - SUBLISTA - FIN
     #FOR HORARIOS - FIN    
 #RESERVO - ELIJO DIA, HORA Y CANCHA - INICIO
 
 General.sendmail(asuntomail,botmail,passmail,destinomail,smtpmail,portmail,mensajemail,directorio) 
+  

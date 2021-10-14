@@ -46,6 +46,13 @@ class Scrapper():
             break 
         return encontro
 
+    def findText(browser,inby,buscar):
+        campos = browser.find_elements(inby,buscar)
+        for campo in campos:
+            texto = campo.get_attribute('innerHTML')
+            break
+        return texto
+
 class General():
     def sendmail(asunto,botmail,passmail,destino,smtp,port,mensaje,directorio):
         msg = MIMEMultipart("plain")

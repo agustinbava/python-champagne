@@ -5,6 +5,8 @@ from random import randint
 from os import remove
 import os
 import pyautogui
+import pymysql
+import base64
 
 #CREO FUNCIONES - INICIO
 def ingresartextoteclado(texto):
@@ -46,4 +48,30 @@ def capturarpantalla(capturas,directorio):
     screenshot = pyautogui.screenshot()
     screenshot.save(urlimagen)
     return cantcapturas
+
+def insertarReservaDB(polideportivo,fecha,hora,cancha,usuario,logueo,estado,nroturno):
+    connection = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="Carp2204",
+        db="botiturnos"
+    )
+
+    cursor = connection.cursor()
+
+    fechastr = str(fecha.year) + "-" + str(fecha.month) + "-" + str(fecha.day)
+    sql = "INSERT INTO Reserva(ReservaPolideportivo, ReservaFecha, ReservaHora, ReservaCancha, ReservaUsuario, ReservaLogueo, ReservaEstado, ReservaTurno)"
+    sql += "VALUES ('" + polideportivo + "', '" + fechastr
+    sql += "', '" + hora + "', '" + cancha + "', '" + usuario + "', '" + logueo + "', '" + estado + "', '" + nroturno + "')"
+
+    cursor.execute(sql)
+
+    connection.commit()    
+
+def generarURLTurno(nroturno):
+    encriptado = base64.b64encode(bytes(nroturno, 'utf-8'))
+    url = r"https://formulario-sigeci.buenosaires.gob.ar/cancelar/"
+    url += encriptado.decode("utf-8") 
+    url += r"/NjMxYzZhZTE0YmFlNGE0NjoyMDIxLTEwLTExVDAwOjQ1OjE5LjY5Nw=="
+    return url
 #CREO FUNCIONES - FIN 
